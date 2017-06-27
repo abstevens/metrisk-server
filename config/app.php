@@ -191,6 +191,11 @@ return [
          */
         Laravel\Passport\PassportServiceProvider::class,
 
+        /*
+         * Trusted Proxy Service Providers...
+         */
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
+
     ],
 
     /*
