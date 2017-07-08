@@ -34,4 +34,3 @@ class CreateCategoriesTable extends Migration
         Schema::drop('categories');
     }
 }
-g
