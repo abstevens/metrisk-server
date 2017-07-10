@@ -7,7 +7,7 @@ use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Option extends Model {
+class Category extends Model {
 
     use CrudTrait;
 
@@ -17,11 +17,11 @@ class Option extends Model {
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'options';
+    protected $table = 'categories';
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['title', 'question_id', 'order', 'author_id'];
+    protected $fillable = ['title', 'author_id'];
     public $timestamps = true;
 
     /*
@@ -39,16 +39,6 @@ class Option extends Model {
     public function users(): BelongsTo
     {
         return $this->belongsTo('App\Models\User');
-    }
-
-    public function questions(): BelongsTo
-    {
-        return $this->belongsTo('App\Models\Question');
-    }
-
-    public function answers(): HasMany
-    {
-        return $this->hasMany('App\Models\Answer');
     }
 
     public function weights(): HasMany
