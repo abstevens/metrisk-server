@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Class extends Model {
+class QuestionClass extends Model {
 
     use CrudTrait;
 
@@ -16,11 +16,11 @@ class Class extends Model {
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'options';
+    protected $table = 'classes';
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['title', 'question_id', 'order', 'author_id'];
+    protected $fillable = ['title', 'order', 'question_id', 'author_id'];
     public $timestamps = true;
 
     /*
@@ -40,19 +40,9 @@ class Class extends Model {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function questions()
+    public function questions(): BelongsTo
     {
         return $this->belongsTo('App\Models\Question');
-    }
-
-    public function answers()
-    {
-        return $this->hasMany('App\Models\Answer');
-    }
-
-    public function weights()
-    {
-        return $this->hasMany('App\Models\Weight');
     }
 
     /*
