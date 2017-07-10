@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class PermissionUser extends Model {
+class Permission extends Model {
 
     use CrudTrait;
 
@@ -16,11 +16,11 @@ class PermissionUser extends Model {
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'permission_users';
+    protected $table = 'permissions';
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['user_id', 'permission_id'];
+    protected $fillable = ['title'];
     public $timestamps = true;
 
     /*
@@ -40,9 +40,9 @@ class PermissionUser extends Model {
         return $this->belongsToMany('App\Models\User');
     }
 
-    public function permissions(): BelongsToMany
+    public function roles(): BelongsToMany
     {
-        return $this->belongsToMany('App\Models\Permission');
+        return $this->belongsToMany('App\Models\Role');
     }
 
     /*
