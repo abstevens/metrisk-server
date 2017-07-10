@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Option extends Model {
 
@@ -19,7 +21,7 @@ class Option extends Model {
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['question', 'risk_type', 'weight', 'order'];
+    protected $fillable = ['title', 'question_id', 'order', 'author_id'];
     public $timestamps = true;
 
     /*
@@ -34,9 +36,24 @@ class Option extends Model {
     |--------------------------------------------------------------------------
     */
 
-    public function risk_type()
+    public function users(): BelongsTo
     {
-        return $this->hasMany('App\Models\Article', 'article_tag');
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function questions(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\Question');
+    }
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany('App\Models\Answer');
+    }
+
+    public function weights(): HasMany
+    {
+        return $this->hasMany('App\Models\Weight');
     }
 
     /*
