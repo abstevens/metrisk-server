@@ -1,15 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexanderstevens
- * Date: 5/29/17
- * Time: 3:52 PM
- */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Question extends Model {
 
@@ -25,7 +21,7 @@ class Question extends Model {
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['name', 'description', 'order'];
+    protected $fillable = ['title', 'description', 'order', 'author_id'];
     public $timestamps = true;
 
     /*
@@ -40,9 +36,19 @@ class Question extends Model {
     |--------------------------------------------------------------------------
     */
 
-    public function articles()
+    public function users(): BelongsTo
     {
-        return $this->hasMany('App\Models\Article', 'article_tag');
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function options(): HasMany
+    {
+        return $this->hasMany('App\Models\Option');
+    }
+
+    public function classes(): HasMany
+    {
+        return $this->hasMany('App\Models\QuestionClass');
     }
 
     /*
