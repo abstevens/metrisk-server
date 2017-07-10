@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Option extends Model {
+class RoleUser extends Model {
 
     use CrudTrait;
 
@@ -17,11 +16,11 @@ class Option extends Model {
 	|--------------------------------------------------------------------------
 	*/
 
-    protected $table = 'options';
+    protected $table = 'role_users';
      protected $primaryKey = 'id';
     // protected $guarded = [];
     // protected $hidden = ['id'];
-    protected $fillable = ['title', 'question_id', 'order', 'author_id'];
+    protected $fillable = ['role_id', 'user_id'];
     public $timestamps = true;
 
     /*
@@ -36,24 +35,14 @@ class Option extends Model {
     |--------------------------------------------------------------------------
     */
 
-    public function users(): BelongsTo
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsToMany('App\Models\User');
     }
 
-    public function questions(): BelongsTo
+    public function roles(): BelongsToMany
     {
-        return $this->belongsTo('App\Models\Question');
-    }
-
-    public function answers(): HasMany
-    {
-        return $this->hasMany('App\Models\Answer');
-    }
-
-    public function weights(): HasMany
-    {
-        return $this->hasMany('App\Models\Weight');
+        return $this->belongsToMany('App\Models\Role');
     }
 
     /*
