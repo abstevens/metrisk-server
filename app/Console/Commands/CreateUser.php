@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
-use App\User;
+use App\Models\User;
 
 class CreateUser extends Command
 {
