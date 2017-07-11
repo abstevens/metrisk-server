@@ -1,9 +1,9 @@
 <?php
 
-use \App\Models\Role;
+use \App\Models\Permission;
 
-$factory->define(Role::class, function (faker\Generator $faker){
+$factory->define(Permission::class, function (faker\Generator $faker){
     return [
-        'title' => $faker->unique()->jobTitle,
+        'title' => $faker->unique()->catchPhrase,
     ];
 });
