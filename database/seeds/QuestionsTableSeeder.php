@@ -12,7 +12,7 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <=20; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             factory(Question::class)->create([
                 'order' => $i,
                 'author_id' => 1,
