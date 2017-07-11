@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Question;
-use \App\Models\QuestionClass;
 
 class QuestionsTableSeeder extends Seeder
 {
@@ -13,7 +12,7 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $classes = QuestionClass::pluck('id');
+        $classes = \App\Models\QuestionClass::pluck('id');
 
         for ($i = 1; $i <= 20; $i++) {
             $class = $classes->random();
