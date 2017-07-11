@@ -12,9 +12,13 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
+        $classes = \App\Models\QuestionClass::pluck('id');
+
         for ($i = 1; $i <= 20; $i++) {
+            $class = $classes->random();
             factory(Question::class)->create([
                 'order' => $i,
+                'class_id' => $class,
                 'author_id' => 1,
             ]);
         }
