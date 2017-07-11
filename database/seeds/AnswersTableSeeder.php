@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\Option;
 use \App\Models\Question;
+use \App\Models\User;
 
-class OptionsTableSeeder extends Seeder
+class AnswersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,16 +13,38 @@ class OptionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $questions = Question::pluck('id');
+//        $questions = Question::with('options')->get()->toArray();
+//        $users = User::pluck('id');
+//
+//        $users->each(function ($user) use ($questions) {
+//            $date = date("Y-m-d H:i:s");
+//
+//            foreach ($questions as $question) {
+//                $randomOption = rand(0, 4);
+//                $answer = $question['options'][$randomOption]['id'];
+//                DB::table('answers')->insert([
+//                    'user_id' => $user,
+//                    'option_id' => $answer,
+//                    'created_at' => $date,
+//                    'updated_at' => $date,
+//                ]);
+//            }
+//        });
+        $questions = Question::with('options')->get();
+        $users = User::pluck('id');
 
-        $questions->each(function ($question) {
-            for ($i = 1; $i <= 5; $i++) {
-                factory(Option::class)->create([
-                    'question_id' => $question,
-                    'order' => $i,
-                    'author_id' => 1,
+        $users->each(function ($user) use ($questions) {
+            $questions->each(function ($question) use ($user) {
+                $date = date("Y-m-d H:i:s");
+                $randomOption = rand(0, 4);
+                $answer = $question->options[$randomOption]->id;
+                DB::table('answers')->insert([
+                    'user_id' => $user,
+                    'option_id' => $answer,
+                    'created_at' => $date,
+                    'updated_at' => $date,
                 ]);
-            }
+            });
         });
     }
 }
