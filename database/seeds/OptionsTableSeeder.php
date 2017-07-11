@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use \App\Models\Option;
 use \App\Models\Question;
 
-class QuestionsTableSeeder extends Seeder
+class OptionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,15 +13,16 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $classes = \App\Models\QuestionClass::pluck('id');
+        $questions = Question::pluck('id');
 
-        for ($i = 1; $i <= 20; $i++) {
-            $class = $classes->random();
-            factory(Question::class)->create([
-                'order' => $i,
-                'class_id' => $class,
-                'author_id' => 1,
-            ]);
-        }
+        $questions->each(function ($question) {
+            for ($i = 1; $i <= 5; $i++) {
+                factory(Option::class)->create([
+                    'question_id' => $question,
+                    'order' => $i,
+                    'author_id' => 1,
+                ]);
+            }
+        });
     }
 }

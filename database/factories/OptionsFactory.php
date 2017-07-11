@@ -1,10 +1,9 @@
 <?php
 
-use \App\Models\Question;
+use \App\Models\Option;
 
-$factory->define(Question::class, function (faker\Generator $faker){
+$factory->define(Option::class, function (faker\Generator $faker){
     return [
-        'title' => $faker->realText(100) . '?',
-        'description' => $faker->text(100),
+        'title' => $faker->realText(20),
     ];
 });
