@@ -17,10 +17,8 @@ class CreateClassesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('order');
-            $table->integer('question_id')->unsigned();
             $table->integer('author_id')->unsigned();
 
-            $table->foreign('question_id')->references('id')->on('questions');
             $table->foreign('author_id')->references('id')->on('users');
 
             $table->timestamps();
