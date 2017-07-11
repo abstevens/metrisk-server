@@ -17,7 +17,7 @@ class CreateWeightsTable extends Migration
             $table->increments('id');
             $table->integer('option_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('amount')->unsigned();
+            $table->float('amount', 3, 1);
             $table->integer('author_id')->unsigned();
 
             $table->foreign('option_id')->references('id')->on('options');

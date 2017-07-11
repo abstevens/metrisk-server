@@ -1,9 +1,9 @@
 <?php
 
-use \App\Models\Option;
+use \App\Models\Weight;
 
-$factory->define(Option::class, function (faker\Generator $faker){
+$factory->define(Weight::class, function (faker\Generator $faker){
     return [
-        'title' => $faker->realText(20),
+        'amount' => $faker->randomFloat(1, 0, 5),
     ];
 });

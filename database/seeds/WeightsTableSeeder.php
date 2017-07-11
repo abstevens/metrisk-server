@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Option;
-use \App\Models\Question;
+use \App\Models\Weight;
 
-class OptionsTableSeeder extends Seeder
+class WeightsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,16 +13,14 @@ class OptionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $questions = Question::pluck('id');
+        $options = Option::pluck('id');
 
-        $questions->each(function ($question) {
-            for ($i = 1; $i <= 5; $i++) {
-                factory(Option::class)->create([
-                    'question_id' => $question,
-                    'order' => $i,
-                    'author_id' => 1,
-                ]);
-            }
+        $options->each(function ($option) {
+            factory(Weight::class)->create([
+                'option_id' => $option,
+                'category_id' => 1,
+                'author_id' => 1,
+            ]);
         });
     }
 }
