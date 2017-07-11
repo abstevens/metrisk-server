@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\RoleUser;
 use \App\Models\User;
-use \App\Models\Role;
+use \App\Models\Permission;
 
-class RoleUsersTableSeeder extends Seeder
+class PermissionUsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,31 +14,21 @@ class RoleUsersTableSeeder extends Seeder
     public function run()
     {
         $users = User::pluck('id');
-        $roles = Role::pluck('id');
+        $permissions = Permission::pluck('id');
 
-        $users->each(function ($user, $key) use ($roles) {
-            $randomRoles = $roles->random(3)->all();
-            $randomRolesKeys = array_keys($randomRoles);
-            $chance = mt_rand(0, 9);
+        $users->each(function ($user, $key) use ($permissions) {
+            $halfPermissionsCount = $permissions->count() / 2;
+            $randomPermissionsAmount = mt_rand(1, $halfPermissionsCount);
+            $permissionRoles = $permissions->random($randomPermissionsAmount);
 
-            if ($chance <= 6) {
-                $insertCount = 1;
-            } elseif ($chance <= 8) {
-                $insertCount = 2;
-            } else {
-                $insertCount = 3;
-            }
-
-            for ($i = 0; $i < $insertCount; $i++) {
-                $roleIndex = $randomRolesKeys[$i];
-
-                DB::table('role_users')->insert(
+            $permissionRoles->each(function ($permission) use ($user) {
+                DB::table('permission_users')->insert(
                     [
                         'user_id' => $user,
-                        'role_id' => $randomRoles[$roleIndex],
+                        'permission_id' => $permission,
                     ]
                 );
-            }
+            });
         });
     }
 }
