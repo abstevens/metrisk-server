@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Question;
+use App\Models\User;
 
 class QuestionsTableSeeder extends Seeder
 {
