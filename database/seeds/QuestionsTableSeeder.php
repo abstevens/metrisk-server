@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Question;
+use App\Models\User;
 
 class QuestionsTableSeeder extends Seeder
 {
@@ -12,9 +13,10 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <=20; $i++) {
             factory(Question::class)->create([
                 'order' => $i,
+                'author_id' => 1,
             ]);
         }
     }
