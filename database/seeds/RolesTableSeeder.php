@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\Models\Role;
 
-class UsersTableSeeder extends Seeder
+class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,15 +12,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'Testing example',
-            'email' => 'testing@example.com',
-            'password' => bcrypt('testing'),
-            'remember_token' => str_random(10),
+        DB::table('roles')->insert([
+            'title' => 'Admin',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
 
-        factory(User::class, 50)->create();
+        factory(Role::class, 4)->create();
     }
 }
