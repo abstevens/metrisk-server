@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\Question;
-use App\Models\User;
+use \App\Models\QuestionClass;
 
-class QuestionsTableSeeder extends Seeder
+class ClassesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +12,8 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <=20; $i++) {
-            factory(Question::class)->create([
+        for ($i = 1; $i <= 5; $i++) {
+            factory(QuestionClass::class)->create([
                 'order' => $i,
                 'author_id' => 1,
             ]);
