@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\RoleUser;
 use \App\Models\User;
 use \App\Models\Role;
 
