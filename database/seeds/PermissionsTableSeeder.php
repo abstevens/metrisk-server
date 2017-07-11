@@ -12,10 +12,12 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        $date = date("Y-m-d H:i:s");
+
         DB::table('permissions')->insert([
             'title' => 'Users management',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'created_at' => $date,
+            'updated_at' => $date,
         ]);
 
         factory(Permission::class, 9)->create();

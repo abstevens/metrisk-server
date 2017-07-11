@@ -12,10 +12,12 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        $date = date("Y-m-d H:i:s");
+
         DB::table('roles')->insert([
             'title' => 'Admin',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'created_at' => $date,
+            'updated_at' => $date,
         ]);
 
         factory(Role::class, 4)->create();
