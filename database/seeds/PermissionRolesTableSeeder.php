@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use \App\Models\Role;
 use \App\Models\Permission;
-use Database\Traits\AdminRights;
+use \Database\Traits\AdminRights;
 
 class PermissionRolesTableSeeder extends Seeder
 {

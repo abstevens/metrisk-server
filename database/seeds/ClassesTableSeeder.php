@@ -2,9 +2,12 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\QuestionClass;
+use \Database\Traits\AdminRights;
 
 class ClassesTableSeeder extends Seeder
 {
+    use AdminRights;
+
     /**
      * Run the database seeds.
      *
@@ -12,10 +15,12 @@ class ClassesTableSeeder extends Seeder
      */
     public function run()
     {
+        $userId = $this->getAdminId(User::class, 'email', 'testing@example.com');
+
         for ($i = 1; $i <= 5; $i++) {
             factory(QuestionClass::class)->create([
                 'order' => $i,
-                'author_id' => 1,
+                'author_id' => $userId,
             ]);
         }
     }

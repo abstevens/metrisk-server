@@ -3,9 +3,12 @@
 use Illuminate\Database\Seeder;
 use \App\Models\Question;
 use \App\Models\QuestionClass;
+use \Database\Traits\AdminRights;
 
 class QuestionsTableSeeder extends Seeder
 {
+    use AdminRights;
+
     /**
      * Run the database seeds.
      *
@@ -13,6 +16,8 @@ class QuestionsTableSeeder extends Seeder
      */
     public function run()
     {
+        $userId = $this->getAdminId(User::class, 'email', 'testing@example.com');
+
         $classes = QuestionClass::pluck('id');
 
         for ($i = 1; $i <= 20; $i++) {
@@ -20,7 +25,7 @@ class QuestionsTableSeeder extends Seeder
             factory(Question::class)->create([
                 'order' => $i,
                 'class_id' => $class,
-                'author_id' => 1,
+                'author_id' => $userId,
             ]);
         }
     }
