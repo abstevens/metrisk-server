@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\Category;
+use \App\Models\User;
 use \Database\Traits\AdminRights;
 
 class CategoriesTableSeeder extends Seeder

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use \App\Models\Option;
 use \App\Models\Question;
+use \App\Models\User;
 use \Database\Traits\AdminRights;
 
 class OptionsTableSeeder extends Seeder

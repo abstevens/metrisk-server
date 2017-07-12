@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use \App\Models\QuestionClass;
-use App\Models\User;
+use \App\Models\User;
 use \Database\Traits\AdminRights;
 
 class ClassesTableSeeder extends Seeder
