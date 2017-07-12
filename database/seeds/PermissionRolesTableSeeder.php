@@ -3,9 +3,12 @@
 use Illuminate\Database\Seeder;
 use \App\Models\Role;
 use \App\Models\Permission;
+use Database\Traits\AdminRights;
 
 class PermissionRolesTableSeeder extends Seeder
 {
+    use AdminRights;
+
     /**
      * Run the database seeds.
      *
@@ -13,16 +16,18 @@ class PermissionRolesTableSeeder extends Seeder
      */
     public function run()
     {
+        $roleId = $this->getAdminId(Role::class, 'title', 'Admin');
+        $permissionId = $this->getAdminId(Permission::class, 'title', 'Users management');
+
         DB::table('permission_roles')->insert([
-            'role_id' => 1,
-            'permission_id' => 1,
+            'role_id' => $roleId,
+            'permission_id' => $permissionId,
         ]);
 
         $roles = Role::pluck('id');
         $permissions = Permission::pluck('id');
 
-        $firstRole = $roles->search(1);
-        unset($roles[$firstRole]);
+        $this->removeFirstAdminId($roles, $roleId);
 
         $roles->each(function ($role, $key) use ($permissions) {
             $halfPermissionsCount = $permissions->count() / 2;

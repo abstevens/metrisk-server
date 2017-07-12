@@ -3,9 +3,12 @@
 use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Role;
+use \Database\Traits\AdminRights;
 
 class RoleUsersTableSeeder extends Seeder
 {
+    use AdminRights;
+
     /**
      * Run the database seeds.
      *
@@ -13,16 +16,18 @@ class RoleUsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $userId = $this->getAdminId(User::class, 'email', 'testing@example.com');
+        $roleId = $this->getAdminId(Role::class, 'title', 'Admin');
+
         DB::table('role_users')->insert([
-            'role_id' => 1,
-            'user_id' => 1,
+            'role_id' => $roleId,
+            'user_id' => $userId,
         ]);
 
         $users = User::pluck('id');
         $roles = Role::pluck('id');
 
-        $firstUser = $users->search(1);
-        unset($users[$firstUser]);
+        $this->removeFirstAdminId($users, $userId);
 
         $users->each(function ($user, $key) use ($roles) {
             $randomRoles = $roles->random(3)->all();

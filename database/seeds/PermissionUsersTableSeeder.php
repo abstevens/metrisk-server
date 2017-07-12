@@ -3,9 +3,12 @@
 use Illuminate\Database\Seeder;
 use \App\Models\User;
 use \App\Models\Permission;
+use \Database\Traits\AdminRights;
 
 class PermissionUsersTableSeeder extends Seeder
 {
+    use AdminRights;
+
     /**
      * Run the database seeds.
      *
@@ -13,16 +16,18 @@ class PermissionUsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $userId = $this->getAdminId(User::class, 'email', 'testing@example.com');
+        $permissionId = $this->getAdminId(Permission::class, 'title', 'Users management');
+
         DB::table('permission_users')->insert([
-            'user_id' => 1,
-            'permission_id' => 1,
+            'user_id' => $userId,
+            'permission_id' => $permissionId,
         ]);
 
         $users = User::pluck('id');
         $permissions = Permission::pluck('id');
 
-        $firstUser = $users->search(1);
-        unset($users[$firstUser]);
+        $this->removeFirstAdminId($users, $userId);
 
         $users->each(function ($user, $key) use ($permissions) {
             $halfPermissionsCount = $permissions->count() / 2;
